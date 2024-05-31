@@ -796,28 +796,35 @@
 
     </footer>
     <script>document.addEventListener("DOMContentLoaded", function () {
-            const switchInput = document.querySelector(".input");
-            const sunIcon = document.querySelector(".sun");
-            const moonIcon = document.querySelector(".moon");
-            const body = document.body; // Reference to the body element
-            const aboutSection = document.querySelector(".about"); // Reference to the "About" section
+    const switchInput = document.querySelector(".input");
+    const sunIcon = document.querySelector(".sun");
+    const moonIcon = document.querySelector(".moon");
+    const body = document.body; // Reference to the body element
+    const aboutSection = document.querySelector(".about"); // Reference to the "About" section
 
-            switchInput.addEventListener("change", function () {
-                if (this.checked) {
-                    // Dark mode
-                    body.classList.add("dark-mode");
-                    aboutSection.classList.add("dark-mode"); // Apply dark mode styles to "About" section
-                    sunIcon.style.display = "none";
-                    moonIcon.style.display = "inline-block";
-                } else {
-                    // Light mode
-                    body.classList.remove("dark-mode");
-                    aboutSection.classList.remove("dark-mode"); // Remove dark mode styles from "About" section
-                    sunIcon.style.display = "inline-block";
-                    moonIcon.style.display = "none";
-                }
-            });
-        });
+    // Set dark mode as default
+    switchInput.checked = true;
+    body.classList.add("dark-mode");
+    aboutSection.classList.add("dark-mode"); // Apply dark mode styles to "About" section
+    sunIcon.style.display = "none";
+    moonIcon.style.display = "inline-block";
+
+    switchInput.addEventListener("change", function () {
+        if (this.checked) {
+            // Dark mode
+            body.classList.add("dark-mode");
+            aboutSection.classList.add("dark-mode"); // Apply dark mode styles to "About" section
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "inline-block";
+        } else {
+            // Light mode
+            body.classList.remove("dark-mode");
+            aboutSection.classList.remove("dark-mode"); // Remove dark mode styles from "About" section
+            sunIcon.style.display = "inline-block";
+            moonIcon.style.display = "none";
+        }
+    });
+});
 
     </script>
 </body>
