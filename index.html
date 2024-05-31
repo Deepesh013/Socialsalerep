@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cabin+Condensed:wght@400;500;600;700&family=Patua+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        .light-mode {
+            background-color: #b8b8b8;
+            color: #000;
+        }
+
+        .dark-mode .about {
+            background-color: #212121;
+        }
+
+        .dark-mode footer {
+            background-color: #212121;
+        }
+
+        .dark-mode footer svg {
+            color: #000;
+        }
+
+        /* Styles for dark mode */
+        .dark-mode {
+            background-color: #000000;
+            color: #fff;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .btn {
+
+            margin-top: 5%;
+            margin-bottom: 4%;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .head {
+            color: #e63946;
+            margin-top: -10%;
+            font-size: 5em;
+            font-family: "Patua One", serif;
+            font-weight: 300;
+            font-style: normal;
+
+        }
+
+        #para {
+            display: none;
+            font-size: 2em;
+            font-family: "Cabin Condensed", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .video {
+            display: none;
+        }
+
+        .media {
+            margin-top: 2%;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .photo {
+            position: relative;
+            width: 60%;
+            height: 100%;
+        }
+
+        .button-1 {
+            position: relative;
+            width: 15%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            outline-offset: 4px;
+            transition: filter 250ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-1-shadow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: hsl(0deg 0% 0% / 0.25);
+            will-change: transform;
+            transform: translateY(2px);
+            transition:
+                transform 600ms cubic-bezier(.3, .7, .4, 1);
+        }
+
+        .button-1-edge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: linear-gradient(to left,
+                    hsl(340deg 100% 16%) 0%,
+                    hsl(340deg 100% 32%) 8%,
+                    hsl(340deg 100% 32%) 92%,
+                    hsl(340deg 100% 16%) 100%);
+        }
+
+        .button-1-front {
+            display: block;
+            position: relative;
+            padding: 12px 27px;
+            border-radius: 12px;
+            font-size: 2em;
+            font-family: "Cabin Condensed", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            color: white;
+            background: hsl(345deg 100% 47%);
+            will-change: transform;
+            transform: translateY(-4px);
+            transition:
+                transform 600ms cubic-bezier(.3, .7, .4, 1);
+        }
+
+        /*
+}*/
+
+        .button-1:hover {
+            filter: brightness(110%);
+            -webkit-filter: brightness(110%);
+        }
+
+        .button-1:hover .button-1-front {
+            transform: translateY(-6px);
+            transition:
+                transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+        }
+
+        .button-1:active .button-1-front {
+            transform: translateY(-2px);
+            transition: transform 34ms;
+        }
+
+        .button-1:hover .button-1-shadow {
+            transform: translateY(4px);
+            transition:
+                transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+        }
+
+        .button-1:active .button-1-shadow {
+            transform: translateY(1px);
+            transition: transform 34ms;
+        }
+
+        .button-1:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .bg-img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.12;
+            /* Adjust opacity as needed */
+            z-index: -1;
+        }
+
+        .about {
+            background-color: #e4e4e4;
+            margin-left: 3%;
+            margin-right: 3%;
+            line-height: 1.5;
+            box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .about h2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cabin Condensed', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #e63946;
+        }
+
+        .about p {
+
+            font-size: 20px;
+            margin-left: 5%;
+            margin-right: 5%;
+            font-family: "Be Vietnam Pro", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .about label {
+
+            text-decoration: underline;
+            margin: 1px;
+            color: #e63946;
+
+        }
+
+        .switch {
+            font-size: 17px;
+            position: relative;
+            display: inline-block;
+            width: 64px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #73C0FC;
+            transition: .4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 30px;
+            width: 30px;
+            border-radius: 20px;
+            left: 2px;
+            bottom: 2px;
+            z-index: 2;
+            background-color: #e8e8e8;
+            transition: .4s;
+        }
+
+        .sun svg {
+            position: absolute;
+            top: 6px;
+            left: 36px;
+            z-index: 1;
+            width: 24px;
+            height: 24px;
+        }
+
+        .moon svg {
+            fill: #73C0FC;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            z-index: 1;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* .switch:hover */
+        .sun svg {
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+
+            0% {
+                transform: rotate(0);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* .switch:hover */
+        .moon svg {
+            animation: tilt 5s linear infinite;
+        }
+
+        @keyframes tilt {
+
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                transform: rotate(10deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .input:checked+.slider {
+            background-color: #183153;
+        }
+
+        .input:focus+.slider {
+            box-shadow: 0 0 1px #183153;
+        }
+
+        .input:checked+.slider:before {
+            transform: translateX(30px);
+        }
+
+        .mode-setup {
+            position: sticky;
+            top: 0px;
+            display: flex;
+            justify-content: flex-end;
+            margin: 2%;
+            padding: 2%;
+        }
+
+        .social-media {
+
+            margin-bottom: -6%;
+        }
+
+        .wrapper {
+            display: inline-flex;
+            list-style: none;
+            width: 100%;
+
+            font-family: "Poppins", sans-serif;
+            justify-content: center;
+        }
+
+        .wrapper .icon {
+            position: relative;
+            background: #fff;
+            border-radius: 50%;
+            margin: 10px;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .tooltip {
+            position: absolute;
+            top: 0;
+            font-size: 14px;
+            background: #fff;
+            color: #fff;
+            padding: 5px 8px;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .tooltip::before {
+            position: absolute;
+            content: "";
+            height: 8px;
+            width: 8px;
+            background: #fff;
+            bottom: -3px;
+            left: 50%;
+            transform: translate(-50%) rotate(45deg);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .icon:hover .tooltip {
+            top: -45px;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .wrapper .icon:hover span,
+        .wrapper .icon:hover .tooltip {
+            text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .wrapper .facebook:hover,
+        .wrapper .facebook:hover .tooltip,
+        .wrapper .facebook:hover .tooltip::before {
+            background: #1877f2;
+            color: #fff;
+        }
+
+        .wrapper .twitter:hover,
+        .wrapper .twitter:hover .tooltip,
+        .wrapper .twitter:hover .tooltip::before {
+            background: #1da1f2;
+            color: #fff;
+        }
+
+        .wrapper .instagram:hover,
+        .wrapper .instagram:hover .tooltip,
+        .wrapper .instagram:hover .tooltip::before {
+            background: #e4405f;
+            color: #fff;
+        }
+
+        .cbutton {
+            margin-top: -5%;
+            padding-right: 1%;
+            padding-bottom: 1%;
+            display: flex;
+            justify-content: end;
+            align-items: end;
+        }
+
+        footer {
+            margin-top: 4%;
+            margin-left: 3%;
+            margin-bottom: 1%;
+            margin-right: 3%;
+            background-color: #e4e4e4ec;
+            box-shadow: rgb(0, 0, 0) 0px 22px 70px 4px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: left;
+
+        }
+
+        .fpara {
+            padding: 2%;
+            display: inline-block;
+        }
+
+        .contactButton {
+            background: #e63946;
+            color: white;
+            font-family: inherit;
+            padding: 0.45em;
+            padding-left: 1em;
+            font-size: 17px;
+            font-weight: 500;
+            border-radius: 0.9em;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            box-shadow: inset 0 0 1.6em -0.6em #e63946;
+            overflow: hidden;
+            position: relative;
+            height: 2.8em;
+            padding-right: 3em;
+        }
+
+        .iconButton {
+            margin-left: 1em;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 2.2em;
+            width: 2.2em;
+            border-radius: 0.7em;
+            box-shadow: 0.1em 0.1em 0.6em 0.2em #f71a2d;
+            right: 0.3em;
+            transition: all 0.3s;
+        }
+
+        .contactButton:hover {
+            transform: translate(-0.05em, -0.05em);
+            box-shadow: 0.15em 0.15em #f43f4ec7;
+        }
+
+        .contactButton:active {
+            transform: translate(0.05em, 0.05em);
+            box-shadow: 0.05em 0.05em #f43f4ec7;
+        }
+
+        .logo img {
+            position: absolute;
+            margin-left: 2%;
+            width: 10%;
+        }
+
+        /*mobile view*/
+
+        @media screen and (max-width: 834px) {
+            .social-media {
+                margin-left: -55%;
+            }
+
+            .cbutton {
+                margin-top: -28%;
+                padding-bottom: 60px;
+            }
+
+            .fpara {
+                margin-top: 20px;
+            }
+
+            .button-1 {
+                width: 50%;
+            }
+
+            .btn {
+                margin-top: 30px;
+            }
+
+            .head {
+                font-size: 2em;
+            }
+
+            #para {
+                display: block;
+                margin-top: 10px;
+                font-size: 1em;
+            }
+
+            .button-1-front {
+                font-size: 1.25rem;
+                padding: 12px 42px;
+            }
+
+            .video {
+                display: block;
+            }
+
+            .photo {
+                display: none;
+            }
+
+            .about {
+                line-height: 1.2;
+                margin-left: 3%;
+                margin-right: 3%;
+            }
+
+            .about h2 {
+                font-size: 1.4em;
+            }
+
+            .about p {
+                font-size: 1em;
+                margin: 0px;
+            }
+
+            .logo img {
+                width: 13%;
+                margin: 2%;
+            }
+        }
+
+        @media screen and (min-width: 400px) and (max-width: 550px) {
+
+            .cbutton {
+                margin-top: -25%;
+                padding-bottom: 60px;
+            }
+        }
+
+        @media screen and (min-width: 600px) and (max-width: 900px) {
+
+            .social-media {
+                margin-left: 10%;
+            }
+
+            .fpara {
+                margin-top: 0px;
+            }
+
+            .cbutton {
+                margin-top: -8%;
+                padding-bottom: 2%;
+            }
+        }
+
+        @media screen and (min-width: 600px) and (max-width: 760px) {
+            .social-media {
+                margin-left: 0%;
+            }
+
+            .fpara {
+                margin-top: 5%;
+            }
+        }
+
+        @media screen and (min-width: 490px) and (max-width: 598px) {
+            .social-media {
+                margin-left: -40%;
+            }
+
+            .fpara {
+                margin-top: 5%;
+            }
+
+            .cbutton {
+                margin-top: -18%;
+                padding-bottom: 10%;
+            }
+        }
+
+        @media screen and (min-width: 430px) and (max-width: 490px) {
+
+            .fpara {
+                margin-top: 5%;
+            }
+
+            .cbutton {
+                margin-top: -22%;
+                padding-bottom: 10%;
+            }
+        }
+
+        @media screen and (min-width: 1300px) and (max-width: 2000px) {
+            .fpara {
+                margin-top: 5%;
+            }
+
+            .cbutton {
+                margin-top: -8%;
+                padding-bottom: 4%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img src="image.png" class="bg-img">
+    <div class="logo"><img src="SSR5.png"></div>
+    <div class="mode-setup">
+        <label class="switch">
+            <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g fill="#ffd43b">
+                        <circle r="5" cy="12" cx="12"></circle>
+                        <path
+                            d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z">
+                        </path>
+                    </g>
+                </svg></span>
+            <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                    <path
+                        d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z">
+                    </path>
+                </svg></span>
+            <input type="checkbox" class="input">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="container">
+        <p class="head">Find Your Perfect<br>
+            ONLINE JOB</p>
+    </div>
+    <p class="container" id="para">Watch the video for more information</p>
+    <div class="media">
+        <img src="deeep.png" class="photo">
+        <video class="video" width="300" height="500" controls>
+            <source src="Live Chat Reel 2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="btn">
+
+        <button class="button-1" role="button">
+            <a href="info.html">
+                <span class="button-1-shadow"></span>
+                <span class="button-1-edge"></span>
+                <span class="button-1-front text">
+                    Apply now
+                </span>
+        </button>
+        </a>
+    </div>
+    <div class="about">
+        <h2>$175 a day for liking Facebook posts</h2>
+        <p>If you know how to Tweet, like a post on Facebook, or upload a video to YouTube (it’s simple and we’ll
+            provide you with step-by-step instructions) then today’s available job could be the simplest money you ever
+            make.</p>
+        <div>
+            <p><label>Job title:</label>Get paid to help businesses post content to their social media accounts like
+                Facebook, Twitter, YouTube, and Instagram.<br>
+
+                <label> Job description:</label> We’re looking for ordinary folk from India to help online companies
+                promote their businesses through social media using their phone or tablet (both Android and IOS). You
+                don’t need to know anything about social media advertising, as this is an entry-level position and full
+                training is provided.<br>
+
+                <label> Pay:</label> $35 an hour ($175 a day)<br>
+
+                <label> Location:</label> Posting to social media accounts is obviously done online, so this is a remote
+                position available to people from India.<br>
+
+                <label> Requirements:</label> You need three things: 1) An internet-connected device such as a laptop,
+                phone, or tablet (Android or IOS) 2) Internet access 3) 5 hours available each day to use social media
+                to promote these companies.<br>
+
+                <label> Experience necessary:</label> Have you ever Tweeted or made a Facebook post? Then you have all
+                the experience you need to start this job. These businesses are looking to hire regular social media
+                users, not social media advertising executives. Better yet, we offer full training on everything you
+                need to know so you can pocket your first $35 an hour ASAP. There is high demand for new workers to
+                start on these jobs right away.<br>
+            </p>
+        </div>
+    </div>
+    <footer>
+
+        <div class="social-media">
+            <ul class="wrapper">
+                <li class="icon facebook"
+                    onclick="window.location.href=`https://www.facebook.com/dreeamdose?mibextid=kFxxJD`">
+                    <span class="tooltip">Facebook</span>
+                    <svg viewBox="0 0 320 512" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z">
+                        </path>
+                    </svg>
+                </li>
+                <li class="icon instagram"
+                    onclick="window.location.href=`https://www.instagram.com/dreeamdose?igsh=MTR0cjdrMTIwZjEycw%3D%3D&utm_source=qr`">
+                    <span class="tooltip">Instagram</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" class="bi bi-instagram"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z">
+                        </path>
+                    </svg>
+                </li>
+
+            </ul>
+
+        </div>
+        <p class="fpara">&copy; 2024 Socialsalerep. All rights reserved</p>
+        <div class="cbutton">
+            <button class="contactButton" onclick="window.location.href=`info.html`">
+                Contact
+                <div class="iconButton">
+                    <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                            fill="currentColor"></path>
+                    </svg>
+                </div>
+            </button>
+        </div>
+
+    </footer>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            const switchInput = document.querySelector(".input");
+            const sunIcon = document.querySelector(".sun");
+            const moonIcon = document.querySelector(".moon");
+            const body = document.body; // Reference to the body element
+            const aboutSection = document.querySelector(".about"); // Reference to the "About" section
+
+            switchInput.addEventListener("change", function () {
+                if (this.checked) {
+                    // Dark mode
+                    body.classList.add("dark-mode");
+                    aboutSection.classList.add("dark-mode"); // Apply dark mode styles to "About" section
+                    sunIcon.style.display = "none";
+                    moonIcon.style.display = "inline-block";
+                } else {
+                    // Light mode
+                    body.classList.remove("dark-mode");
+                    aboutSection.classList.remove("dark-mode"); // Remove dark mode styles from "About" section
+                    sunIcon.style.display = "inline-block";
+                    moonIcon.style.display = "none";
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

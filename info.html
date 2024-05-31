@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.798);
+            color: #fff;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20%;
+            transform-style: preserve-3d;
+            transition: all 1s ease;
+        }
+
+        .form .form_front {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: absolute;
+            backface-visibility: hidden;
+            padding: 4% 5%;
+            border-radius: 15px;
+            box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 1),
+                inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+        }
+
+        .form_details {
+            font-size: 25px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            color: white;
+        }
+
+        .input {
+            width: 245px;
+            min-height: 45px;
+            color: #fff;
+            outline: none;
+            transition: 0.35s;
+            padding: 0px 7px;
+            background-color: #212121;
+            border-radius: 6px;
+            border: 2px solid #212121;
+            box-shadow: 6px 6px 10px rgba(0, 0, 0, 1),
+                1px 1px 10px rgba(255, 255, 255, 0.6);
+        }
+
+        .input::placeholder {
+            color: #999;
+        }
+
+        .input:focus.input::placeholder {
+            transition: 0.3s;
+            opacity: 0;
+        }
+
+        .input:focus {
+            transform: scale(1.05);
+            box-shadow: 6px 6px 10px rgba(0, 0, 0, 1),
+                1px 1px 10px rgba(255, 255, 255, 0.6),
+                inset 2px 2px 10px rgba(0, 0, 0, 1),
+                inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+        }
+
+        .btn {
+            padding: 10px 35px;
+            cursor: pointer;
+            background-color: #212121;
+            border-radius: 6px;
+            border: 2px solid #212121;
+            box-shadow: 6px 6px 10px rgba(0, 0, 0, 1),
+                1px 1px 10px rgba(255, 255, 255, 0.6);
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.35s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 6px 6px 10px rgba(0, 0, 0, 1),
+                1px 1px 10px rgba(255, 255, 255, 0.6),
+                inset 2px 2px 10px rgba(0, 0, 0, 1),
+                inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+        }
+
+        .btn:focus {
+            transform: scale(1.05);
+            box-shadow: 6px 6px 10px rgba(0, 0, 0, 1),
+                1px 1px 10px rgba(255, 255, 255, 0.6),
+                inset 2px 2px 10px rgba(0, 0, 0, 1),
+                inset -1px -1px 5px rgba(255, 255, 255, 0.6);
+        }
+
+        @media screen and (max-width: 400px) {
+            .form {
+                margin-top: 70%;
+
+            }
+
+            .container h1 {
+                margin-top: 10%;
+                font-size: 1em;
+            }
+        }
+
+        @media screen and (min-width: 400px) and (max-width: 480px) {
+            .form {
+                margin-top: 60%;
+            }
+
+            .container h1 {
+                margin-top: 10%;
+                font-size: 1em;
+            }
+        }
+
+        @media screen and (min-width: 480px) and (max-width: 580px) {
+            .form {
+                margin-top: 45%;
+
+            }
+
+            .container h1 {
+                margin-top: 10%;
+                font-size: 1.34em;
+            }
+        }
+
+        @media screen and (min-width: 580px) and (max-width: 880px) {
+            .form {
+                margin-top: 35%;
+
+            }
+
+            .container h1 {
+                margin-top: 10%;
+                font-size: 1.45em;
+            }
+        }
+
+        @media screen and (min-width: 880px) and (max-width: 1080px) {
+            .form {
+                margin-top: 25%;
+
+            }
+
+            .container h1 {
+                margin-top: 10%;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Please provide your information below:</h1>
+    </div>
+
+    <form id="contactForm" action="https://formspree.io/f/xgegjewk" method="POST" autocomplete="off">
+        <div class="form">
+            <div class="form_front">
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" class="input" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" class="input" name="email" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" class="input" name="phone" required>
+
+                <a href="http://tinyurl.com/5n8x8prw"> <button type="submit" class="btn">Submit</button></a>
+    </form>
+    </div>
+    </div>
+
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Simple validation (you can add more)
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            if (name && email && phone) {
+                this.submit();
+                window.open(`http://tinyurl.com/5n8x8prw`, '_blank');
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+    </script>
+</body>
+
+</html>
